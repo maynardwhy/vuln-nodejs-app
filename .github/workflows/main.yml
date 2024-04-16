@@ -63,7 +63,7 @@ jobs:
     needs: [build, sca]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       
       - name: Build docker-compose for testing
         run: docker-compose -f ./docker-compose.yml up --build -d
@@ -71,6 +71,6 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.6.1
         with:
-         target: 'http://localhost:9000'
-         cmd_options: '-a'
+         target: 'http://127.0.0.1:9000'
+         cmd_options: '-a -r report_html.html'
   
